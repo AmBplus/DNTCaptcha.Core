@@ -53,10 +53,7 @@ public class DNTCaptchaApiProvider : IDNTCaptchaApiProvider
     /// <param name="captchaAttributes">captcha attributes</param>
     public DNTCaptchaApiResponse CreateDNTCaptcha(DNTCaptchaTagHelperHtmlAttributes captchaAttributes)
     {
-        if (captchaAttributes == null)
-        {
-            throw new ArgumentNullException(nameof(captchaAttributes));
-        }
+        ArgumentNullException.ThrowIfNull(captchaAttributes);
 
         if (_httpContextAccessor.HttpContext == null)
         {

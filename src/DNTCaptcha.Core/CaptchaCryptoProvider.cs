@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -21,10 +21,7 @@ namespace DNTCaptcha.Core
         /// </summary>
         public CaptchaCryptoProvider(IOptions<DNTCaptchaOptions> options)
         {
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
+            ArgumentNullException.ThrowIfNull(options);
 
             _keyBytes = getDesKey(options.Value.EncryptionKey);
         }

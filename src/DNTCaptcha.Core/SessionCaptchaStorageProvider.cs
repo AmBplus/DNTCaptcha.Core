@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -45,10 +45,7 @@ namespace DNTCaptcha.Core
         /// </returns>
         public bool Contains(HttpContext context, string token)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(context);
 
             return context.Session.Keys.Any(key => string.Equals(key, token, StringComparison.Ordinal));
         }
@@ -60,10 +57,7 @@ namespace DNTCaptcha.Core
         /// <param name="token">The specified token.</param>
         public string? GetValue(HttpContext context, string token)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(context);
 
             var value = context.Session.GetString(token);
             if (string.IsNullOrWhiteSpace(value))

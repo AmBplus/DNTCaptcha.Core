@@ -82,8 +82,12 @@ public class DNTCaptchaImageController : Controller
     ///     Refresh the captcha
     /// </summary>
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true, Duration = 0)]
+#pragma warning disable ASP0023 // Route conflict detected between controller actions
     [HttpGet("[action]")]
+#pragma warning restore ASP0023 // Route conflict detected between controller actions
+#pragma warning disable ASP0023 // Route conflict detected between controller actions
     [HttpPost("[action]")]
+#pragma warning restore ASP0023 // Route conflict detected between controller actions
     public IActionResult Refresh(string data)
     {
         try
@@ -183,8 +187,12 @@ public class DNTCaptchaImageController : Controller
     ///     Creates the captcha image.
     /// </summary>
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true, Duration = 0)]
+#pragma warning disable ASP0023 // Route conflict detected between controller actions
     [HttpGet("[action]")]
+#pragma warning restore ASP0023 // Route conflict detected between controller actions
+#pragma warning disable ASP0023 // Route conflict detected between controller actions
     [HttpPost("[action]")]
+#pragma warning disable ASP0023 // Route conflict detected between controller actions
     public IActionResult Show(string data)
     {
         try

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Text.Json;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
@@ -38,9 +38,11 @@ public class InMemorySerializationProvider : ISerializationProvider
     /// </summary>
     public string Serialize(object data)
     {
+#pragma warning disable CA1869 // Cache and reuse 'JsonSerializerOptions' instances
         var result = JsonSerializer.Serialize(data,
                                               new JsonSerializerOptions
                                               { WriteIndented = false, IgnoreNullValues = true });
+#pragma warning restore CA1869 // Cache and reuse 'JsonSerializerOptions' instances
         var token = _captchaProtectionProvider.Hash(result).HashString;
         _memoryCache.Set(token,
                          result,

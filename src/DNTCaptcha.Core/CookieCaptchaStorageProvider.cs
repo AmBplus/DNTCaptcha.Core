@@ -48,10 +48,7 @@ namespace DNTCaptcha.Core
         /// </returns>
         public bool Contains(HttpContext context, string token)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(context);
 
             return context.Request.Cookies.ContainsKey(token);
         }
@@ -63,10 +60,7 @@ namespace DNTCaptcha.Core
         /// <param name="token">The specified token.</param>
         public string? GetValue(HttpContext context, string token)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(context);
 
             if (!context.Request.Cookies.TryGetValue(token, out var cookieValue))
             {

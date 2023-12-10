@@ -21,10 +21,7 @@ public static class CaptchaServiceCollectionExtensions
         this IServiceCollection services,
         Action<DNTCaptchaOptions>? options = null)
     {
-        if (services == null)
-        {
-            throw new ArgumentNullException(nameof(services));
-        }
+        ArgumentNullException.ThrowIfNull(services);
 
         configOptions(services, options);
 

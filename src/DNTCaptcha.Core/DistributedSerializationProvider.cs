@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.Caching.Distributed;
@@ -39,9 +39,11 @@ public class DistributedSerializationProvider : ISerializationProvider
     /// </summary>
     public string Serialize(object data)
     {
+#pragma warning disable CA1869 // Cache and reuse 'JsonSerializerOptions' instances
         var resultBytes = JsonSerializer.SerializeToUtf8Bytes(data,
                                                               new JsonSerializerOptions
                                                               { WriteIndented = false, IgnoreNullValues = true });
+#pragma warning restore CA1869 // Cache and reuse 'JsonSerializerOptions' instances
         var token = _captchaProtectionProvider.Hash(Encoding.UTF8.GetString(resultBytes)).HashString;
         _distributedCache.Set(token,
                               resultBytes,

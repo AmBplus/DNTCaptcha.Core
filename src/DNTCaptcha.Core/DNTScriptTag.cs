@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Html;
@@ -27,10 +27,7 @@ public class DNTScriptTag : IHtmlContent
     /// <inheritdoc />
     public void WriteTo(TextWriter writer, HtmlEncoder encoder)
     {
-        if (writer == null)
-        {
-            throw new ArgumentNullException(nameof(writer));
-        }
+        ArgumentNullException.ThrowIfNull(writer);
 
         writer.Write($"""<script nonce="{_nonce}" type="text/javascript">""");
         writer.Write(_innerText);

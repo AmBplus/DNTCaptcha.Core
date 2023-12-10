@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Globalization;
 using Microsoft.Extensions.Options;
 
@@ -16,10 +16,7 @@ public class ShowDigitsProvider : ICaptchaTextProvider
     /// </summary>
     public ShowDigitsProvider(IOptions<DNTCaptchaOptions> options)
     {
-        if (options == null)
-        {
-            throw new ArgumentNullException(nameof(options));
-        }
+        ArgumentNullException.ThrowIfNull(options);
 
         _captchaOptions = options.Value;
     }

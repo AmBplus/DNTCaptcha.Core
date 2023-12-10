@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Globalization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
@@ -15,15 +15,9 @@ namespace DNTCaptcha.Core
         /// </summary>
         public static string GetSalt(this HttpContext context, ICaptchaCryptoProvider captchaProtectionProvider)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(context);
 
-            if (captchaProtectionProvider == null)
-            {
-                throw new ArgumentNullException(nameof(captchaProtectionProvider));
-            }
+            ArgumentNullException.ThrowIfNull(captchaProtectionProvider);
 
             var userAgent = context.Request.Headers[HeaderNames.UserAgent].ToString();
             var issueDate = DateTime.Now.ToString("yyyy_MM_dd", CultureInfo.InvariantCulture);

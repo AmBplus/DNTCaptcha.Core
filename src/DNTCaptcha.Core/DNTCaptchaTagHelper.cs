@@ -97,15 +97,9 @@ public class DNTCaptchaTagHelper : DNTCaptchaTagHelperHtmlAttributes, ITagHelper
     /// </summary>
     public void Process(TagHelperContext context, TagHelperOutput output)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-
-        if (output == null)
-        {
-            throw new ArgumentNullException(nameof(output));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(output);
+       
 
         if (ViewContext == null)
         {
@@ -149,7 +143,7 @@ public class DNTCaptchaTagHelper : DNTCaptchaTagHelperHtmlAttributes, ITagHelper
         var hiddenInputToken = getHiddenInputTokenTagBuilder(_captchaProtectionProvider.Encrypt(cookieToken));
         output.Content.AppendHtml(hiddenInputToken);
 
-        var dataAjaxScripts = getOnRefreshButtonDataAjaxScripts(ViewContext);
+        var dataAjaxScripts = GetOnRefreshButtonDataAjaxScripts(ViewContext);
         output.Content.AppendHtml(dataAjaxScripts);
 
         _captchaStorageProvider.Add(ViewContext.HttpContext,
@@ -300,7 +294,7 @@ public class DNTCaptchaTagHelper : DNTCaptchaTagHelperHtmlAttributes, ITagHelper
         return refreshButton;
     }
 
-    private IHtmlContent getOnRefreshButtonDataAjaxScripts(ViewContext viewContext)
+    private DNTScriptTag GetOnRefreshButtonDataAjaxScripts(ViewContext viewContext)
     {
         var requestVerificationToken = _antiforgery.GetAndStoreTokens(viewContext.HttpContext).RequestToken;
         return new

@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <Description>DNTCaptcha.Core is a captcha generator and validator for ASP.NET Core applications.</Description>
         <VersionPrefix>4.9.1</VersionPrefix>
         <Authors>Vahid Nasiri</Authors>
-        <TargetFrameworks>net7.0;net6.0;</TargetFrameworks>
+        <TargetFrameworks>net8.0;net7.0;net6.0;</TargetFrameworks>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <AssemblyName>DNTCaptcha.Core</AssemblyName>
         <PackageId>DNTCaptcha.Core</PackageId>
@@ -80,4 +80,7 @@
     <PropertyGroup Condition="'$(TargetFramework)' == 'net7.0'">
         <DefineConstants>NET7_0</DefineConstants>
     </PropertyGroup>
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net8.0'">
+		<DefineConstants>NET8_0</DefineConstants>
+	</PropertyGroup>
 </Project>

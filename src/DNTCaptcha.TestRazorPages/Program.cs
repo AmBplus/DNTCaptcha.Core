@@ -1,7 +1,8 @@
-using System.IO;
+﻿using System.IO;
 using DNTCaptcha.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -45,7 +46,11 @@ void ConfigureServices(IServiceCollection services, IWebHostEnvironment env)
                                                })
                                    .Identifier("dnt_Captcha"); // This is optional. Change it if you don't like its default name.
                            });
-
+    builder.Services.AddRateLimiter(o => o
+    .AddFixedWindowLimiter(policyName: "fixed", options =>
+    {
+        // configuration
+    }));
     services.AddControllers(); // this is necessary for the captcha's image provider
     services.AddRazorPages();
 }
